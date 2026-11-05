@@ -1,0 +1,58 @@
+Part 1: What the brief gave us
+
+The problem
+
+The Growth team said: “Revenue dropped in September 2026 versus August 2026.”
+The question: is it a real business change or a data problem?
+
+The data
+
+3 files: orders.csv, customers.csv, products.csv.
+The files are deliberately messy, so we should not assume they are correct.
+
+Finance rules we had to follow
+
+Report August and September as two separate months.
+Revenue = quantity × unit price, for completed orders only.
+Exclude cancelled and refunded orders, and don’t subtract refunds.
+Convert USD to INR at exactly ₹85. Other currencies are not supported unless we justify it.
+Trim and lowercase the status. Don’t treat COMPLETE as completed.
+Count only orders with a valid date, customer, product, positive quantity and positive price.
+Remove exact duplicate rows. Quarantine conflicting rows with the same order ID.
+New customer = first completed order in the Aug-Sep data. Later orders are repeat. State the limitation.
+
+What we had to deliver
+
+Data checks, a cleaned dataset with a rejected-rows log, SQL queries, a short summary, and AI verification.
+Not graded: charts, slides, UI.
+Part 2: What we found
+
+Data problems
+
+244 rows but only 240 unique order IDs (3 exact duplicates, plus O0089 conflicting).
+Bad dates, blank and unknown customers, unknown products, zero or negative quantity, and zero price.
+Wrong status values, plus 1 USD and 1 EUR row.
+Result: 197 trusted orders.
+
+Main answer
+
+The revenue drop is real: ₹18.09 lakh to ₹11.37 lakh (−37%).
+
+Why it dropped
+
+Laptop 16 fell ₹7.92 lakh (13 units to 2 units). That is more than the whole net drop.
+Laptop 14 rose ₹2.5 lakh, which reduced the drop a little.
+Orders fell from 113 to 84, and the average order value fell from ₹16.0k to ₹13.5k.
+
+Can the removed rows change the answer?
+
+No. Rows that might have been revenue add only about ₹66k.
+
+What we are not sure about
+
+New vs repeat is only measured within Aug-Sep.
+We don’t know why Laptop 16 sales fell, and we did not claim a cause.
+
+Next action
+
+Ask Sales whether August had big one-time Laptop 16 deals.
